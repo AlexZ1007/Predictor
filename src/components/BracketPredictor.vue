@@ -14,7 +14,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">N/A</span>
                             </div>
-                                <input type="number" class="form-control place" placeholder="Goals" disabled>
+                                <input type="number" class="form-control place" min="0" placeholder="Goals" disabled>
                           </div>
                         </li>
                     </ul>
