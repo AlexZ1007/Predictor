@@ -25,7 +25,6 @@ export default {
     methods:{
         showInfo(message, compID){
             $('#'+compID+' span').text(message);
-            console.log(message);
         },
         hideInfo(compID){
             $('#'+compID+' span').text('');

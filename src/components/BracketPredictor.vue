@@ -100,9 +100,8 @@ export default {
                 let eq=(i-1)%2;
                 let id='#'+phaseNum+''+Math.ceil(i/2);
                 let team=phase[i-1];
-                console.log(team.teamName);
                 $(id+' .input-group-text:eq('+eq+')').html(team.teamName);
-                if(team.teamName=="N/A") {console.log("Disabled"); continue;}
+                if(team.teamName=="N/A") continue;
                 $(id+' input:eq('+eq+')').removeAttr('disabled');
             }
             $("#next-btn1").removeAttr('hidden');

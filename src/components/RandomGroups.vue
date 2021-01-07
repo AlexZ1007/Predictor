@@ -70,7 +70,6 @@ export default {
             }
             groupId++
         }
-        console.log(this.seeds);
       },  
 
       resetCSS(id){

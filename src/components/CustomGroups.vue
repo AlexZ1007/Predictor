@@ -56,7 +56,6 @@ export default {
             }
           }
           if(!redirect) return 0;
-          console.log(this.$parent.groups)
           this.$router.push("/prediction/groupStage/"+this.compID);
       },
 
