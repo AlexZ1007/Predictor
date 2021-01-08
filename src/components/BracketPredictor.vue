@@ -36,8 +36,19 @@ export default {
             bracket: this.$parent.bracket
             } 
         },
+    created(){
+        if(!this.bracket['phase'+1]) {
+            this.bracket=JSON.parse(localStorage.bracket);
+            this.totalPhasesNumber=JSON.parse(localStorage.totalPhasesNumber);
+            this.currentPhaseNum=JSON.parse(localStorage.currentPhaseNum) 
+        }
+    },
     mounted: function(){
-        this.unlockInput(1);
+        for(let i=1; i<this.currentPhaseNum; i++){
+                this.unlockInput(i);
+                this.recoverProgress(i);
+        }
+        this.unlockInput(this.currentPhaseNum)
     },
     methods:{
         nextRound(phaseNum){
@@ -91,10 +102,12 @@ export default {
             }
             if(error) return 0;
             this.currentPhaseNum+=1;
-            $("#next-btn"+this.currentPhaseNum).removeAttr('hidden');
+            localStorage.bracket=JSON.stringify(this.bracket); // Store bracket
+            localStorage.currentPhaseNum=JSON.stringify(this.currentPhaseNum); // Store bracket
             this.unlockInput(this.currentPhaseNum);
         },
         unlockInput(phaseNum){
+
             const phase=this.bracket['phase'+phaseNum];
             for(let i=1;i<=phase.length;i++){
                 let eq=(i-1)%2;
@@ -104,7 +117,8 @@ export default {
                 if(team.teamName=="N/A") continue;
                 $(id+' input:eq('+eq+')').removeAttr('disabled');
             }
-            $("#next-btn1").removeAttr('hidden');
+                        console.log("unlock")
+            $("#next-btn"+phaseNum).removeAttr('hidden');
         },
         final(){
             let phaseNum=this.totalPhasesNumber;
@@ -140,6 +154,17 @@ export default {
             if(error) return 0;
             input_team1.prop( "disabled", true );
             input_team2.prop( "disabled", true );
+        },
+        recoverProgress(phaseNum){
+            let currentPhase=this.bracket['phase'+phaseNum];
+            console.log(currentPhase)
+            for(let j=0;j<currentPhase.length;j+=2){
+                let id='#'+phaseNum+''+Math.ceil((j+1)/2);
+                $(id+" input:eq(0)").val(currentPhase[j].goals); 
+                $(id+" input:eq(0)").prop('disabled',true);
+                $(id+" input:eq(1)").val(currentPhase[j+1].goals);
+                $(id+" input:eq(1)").prop('disabled',true);
+            }
         }
     }
 

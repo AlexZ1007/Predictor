@@ -70,6 +70,7 @@ export default {
             }
             groupId++
         }
+        localStorage.groups=JSON.stringify(this.$parent.groups);    // Save to local storage
       },  
 
       resetCSS(id){

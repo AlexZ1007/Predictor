@@ -5,15 +5,15 @@
       <router-link class="btn btn-dark btn-color-pink btn-hover-aqua" to="/prediction/groupstage" event="" @click.native.prevent="processGroups()">Confirm</router-link>
     </div>
     
-    <div class="row ">
-      <div class="group col col-3" v-for="i in groups" :key="i">
+    <div class="row row-cols-3">
+      <div class="group col" v-for="i in groups" :key="i">
         <div class="card-header">
           GROUP #{{i}} 
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item" v-for="n in teamsPerGroup" :key="n">
             <input  type="text" class="form-control" @change="resetCSS(i.toString()+n.toString())" 
-                    placeholder="Insert team name" :id="i.toString()+n.toString()" autocomplete="off">
+                    placeholder="Insert team name" :id="i.toString()+n.toString()" autocomplete="off" :value="'a'+i.toString()+n.toString()">
           </li>
         </ul>
       </div>
@@ -33,6 +33,7 @@ export default {
     props: ['compID'],
     methods:{
       processGroups(){
+          this.$parent.groups=[[]] // Reset the groups 
           let redirect=true;
           for (let i=1; i<=this.groups; i++){ 
             this.$parent.groups.push([{}]);
@@ -54,6 +55,8 @@ export default {
               // Insert the teams into the groups variable  
               this.$parent.groups[i].push({name: $("#"+id).val(), points: 0, place: 0, GD: 0})
             }
+            // Save the groups into local storage
+            localStorage.groups=JSON.stringify(this.$parent.groups);
           }
           if(!redirect) return 0;
           this.$router.push("/prediction/groupStage/"+this.compID);

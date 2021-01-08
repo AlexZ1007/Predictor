@@ -24,6 +24,7 @@ export default {
       let nearestPowerOfTwo= 1<<31-Math.clz32(teams);
       if(nearestPowerOfTwo<teams) nearestPowerOfTwo*=2;
       this.totalPhasesNumber = Math.log(nearestPowerOfTwo)/Math.log(2);
+      localStorage.totalPhasesNumber=JSON.stringify(this.totalPhasesNumber);
       // Create the phases and their length
       this.bracket['phase1']=[];
       let phase1=this.bracket['phase1'];
@@ -44,6 +45,7 @@ export default {
         seeded.splice(randomNumForSeeded,1);
         unseeded.splice(randomNumForUnseeded,1);
       }
+      localStorage.bracket=JSON.stringify(this.bracket); // Store bracket
     }
   }  
 }
