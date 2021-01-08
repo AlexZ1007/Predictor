@@ -13,7 +13,7 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item" v-for="n in teamsPerGroup" :key="n">
             <input  type="text" class="form-control" @change="resetCSS(i.toString()+n.toString())" 
-                    placeholder="Insert team name" :id="i.toString()+n.toString()" autocomplete="off" :value="'a'+i.toString()+n.toString()">
+                    placeholder="Insert team name" :id="i.toString()+n.toString()" autocomplete="off">
           </li>
         </ul>
       </div>

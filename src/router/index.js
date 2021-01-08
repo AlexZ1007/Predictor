@@ -7,6 +7,7 @@ import CustomGroups from '../components/CustomGroups.vue'
 import RandomGroups from '../components/RandomGroups.vue'
 import GroupStagePredictor from '../components/GroupStagePredictor.vue'
 import BracketPredictor from '../components/BracketPredictor.vue'
+import Page404 from '../components/Page404'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     component: BracketPredictor,
     props: true
   },
+  {
+    path: '/*',
+    name: '404',
+    component: Page404
+  }
 
 ]
 

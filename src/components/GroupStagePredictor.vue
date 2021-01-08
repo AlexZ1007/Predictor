@@ -18,7 +18,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">{{$parent.groups[i][n].name}}</span>
                 </div>
-                <input type="number" class="form-control place" min="1" :max="teamsPerGroup" placeholder="Plc" :value="n">
+                <input type="number" class="form-control place" min="1" :max="teamsPerGroup" placeholder="Plc">
                 <input type="number" class="form-control points" min="0" :max="maxPoints" placeholder="Pts" value="0">
                 <input type="number" class="form-control GD" placeholder="GD" value="0">
             </div>
