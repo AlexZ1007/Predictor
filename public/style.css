@@ -58,7 +58,7 @@ body{
 #advance-div{min-height: 90px;}
 .bg-win{background-color: rgb(119, 233, 119) !important;}
 .bg-lose{background-color: #F76F8E !important;}
-#startpage .row{
+#startpage .row, .padding-top-20{
     padding-top: 20%;
 }
 #startpage .row h1{
