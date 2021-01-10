@@ -85,9 +85,6 @@ export default {
           $("#"+id).attr("placeholder","Insert team name");
       },
       makeDesignResponsive(){
-        //   if(window.innerWidth<860){ $(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-1");  }
-        // else if(window.innerWidth<1200){ $(".groups .row").removeClass("row-cols-3"); $(".groups .row").addClass("row-cols-2");  }
-        // else{  $(".groups .row").addClass("row-cols-3"); $(".groups .row").removeClass("row-cols-2"); $(".groups .row").removeClass("row-cols-1");}
         if(window.innerWidth<780){$(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-1");}
         else if(window.innerWidth<1000){$(".groups .row").removeClass("row-cols-4"); $(".groups .row").addClass("row-cols-2");}
         else { $(".groups .row").removeClass("row-cols-1"); $(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-4"); }
