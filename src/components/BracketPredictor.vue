@@ -48,7 +48,8 @@ export default {
                 this.unlockInput(i);
                 this.recoverProgress(i);
         }
-        this.unlockInput(this.currentPhaseNum)
+        this.unlockInput(this.currentPhaseNum);
+        this.makeDesignResponsive();
     },
     methods:{
         nextRound(phaseNum){

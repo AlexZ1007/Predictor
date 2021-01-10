@@ -24,12 +24,19 @@
 <script>
 import $ from 'jquery'
 export default {
+    created() {
+      window.addEventListener("resize", this.makeDesignResponsive);
+    },
+    destroyed() {
+      window.removeEventListener("resize", this.makeDesignResponsive);
+    },
     data: function(){
       return{
         groups: this.$parent.competions[this.compID].groups,
         teamsPerGroup: this.$parent.competions[this.compID].teamsPerGroup,
       }
     },
+    mounted(){this.makeDesignResponsive()},
     props: ['compID'],
     methods:{
       processGroups(){
@@ -65,6 +72,12 @@ export default {
       resetCSS(id){
           $("#"+id).css("border","1px solid black");
           $("#"+id).attr("placeholder","Insert team name");
+      },
+
+      makeDesignResponsive(){
+        if(window.innerWidth<790){ $(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-1");  }
+        else if(window.innerWidth<1000){ $(".groups .row").removeClass("row-cols-3"); $(".groups .row").addClass("row-cols-2");} 
+        else{  $(".groups .row").addClass("row-cols-3"); $(".groups .row").removeClass("row-cols-2"); $(".groups .row").removeClass("row-cols-1");}
       }
     }
     

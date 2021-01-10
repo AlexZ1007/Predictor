@@ -4,7 +4,7 @@
             <h3>Insert the seeds</h3>
             <router-link class="btn btn-dark btn-color-pink btn-hover-aqua" to="/prediction/groupstage" event="" @click.native.prevent="processGroups()">Draw</router-link>
         </div> 
-        <div class="row">
+        <div class="row card-cols-4">
             <div class="card col no-padding-rl" v-for="i in seedsNum" :key="i">
                 <div class="card-header">Seed #{{i}}</div>
                 <ul class="list-group list-group-flush">
@@ -28,6 +28,13 @@ export default {
             seeds: [[]]
         }
     },
+    created() {
+      window.addEventListener("resize", this.makeDesignResponsive);
+    },
+    destroyed() {
+      window.removeEventListener("resize", this.makeDesignResponsive);
+    },
+    mounted(){this.makeDesignResponsive()},
     props: ['compID'],
     methods:{
       processGroups(){
@@ -76,6 +83,14 @@ export default {
       resetCSS(id){
           $("#"+id).css("border","1px solid black");
           $("#"+id).attr("placeholder","Insert team name");
+      },
+      makeDesignResponsive(){
+        //   if(window.innerWidth<860){ $(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-1");  }
+        // else if(window.innerWidth<1200){ $(".groups .row").removeClass("row-cols-3"); $(".groups .row").addClass("row-cols-2");  }
+        // else{  $(".groups .row").addClass("row-cols-3"); $(".groups .row").removeClass("row-cols-2"); $(".groups .row").removeClass("row-cols-1");}
+        if(window.innerWidth<780){$(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-1");}
+        else if(window.innerWidth<1000){$(".groups .row").removeClass("row-cols-4"); $(".groups .row").addClass("row-cols-2");}
+        else { $(".groups .row").removeClass("row-cols-1"); $(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-4"); }
       }
     }    
 }

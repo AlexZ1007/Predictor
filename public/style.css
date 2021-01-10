@@ -17,6 +17,9 @@ body{
 .comp:hover h2, .info{
     color: #F1BBCC;
 }
+.comp h2{
+    min-height: 80px;
+}
 .options a{
     text-decoration: none;
 }
@@ -111,7 +114,7 @@ body {
 .text-muted{color: #F1BBCC !important;}
 #app div{margin-bottom: 10px;}
 /* #app #compSelect .competionsDisplay{margin-bottom: 0px !important;} */
-#app #compSelect .competionsDisplay .col-sm{margin-bottom: 0px !important;}
+#app #compSelect .competionsDisplay .col{margin-bottom: 0px !important;}
 .card-header{margin-bottom: 0px !important;}
 
 

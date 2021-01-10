@@ -42,8 +42,13 @@ export default {
     },
     props: ['compID'],
     created(){
+      window.addEventListener("resize", this.makeDesignResponsive);
       if(!this.$parent.groups[1]) this.$parent.groups=JSON.parse(localStorage.groups);
     },
+    destroyed() {
+      window.removeEventListener("resize", this.makeDesignResponsive);
+    },
+    mounted(){this.makeDesignResponsive();},
     methods:{
        highlightQualifiedTeams(){
         const groupsNum = this.groupsNum;
@@ -95,7 +100,13 @@ export default {
         cardFooter.html('<span class="text-danger text-15">'+message+'</span>'); 
         cardHeader.addClass('text-danger'); 
         return true;
-      } 
-    } // Methods END
+      },
+      makeDesignResponsive(){
+        if(window.innerWidth<860){ $(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-1");  }
+        else if(window.innerWidth<1200){ $(".groups .row").removeClass("row-cols-3"); $(".groups .row").addClass("row-cols-2");  }
+        else{  $(".groups .row").addClass("row-cols-3"); $(".groups .row").removeClass("row-cols-2"); $(".groups .row").removeClass("row-cols-1");}
+      }
+    }, // Methods END
+    
 }
 </script>
