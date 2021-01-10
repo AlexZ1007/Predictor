@@ -1,5 +1,5 @@
 <template>
-    <div id="compSelect" class="container">
+    <div id="compSelect" class="container no-padding">
         <div class="row competionsDisplay" >
             <div :id="i.id" class="col-sm comp" v-for="i in $parent.competions" :key="i.id">
                 <h2>{{i.name}}</h2>

@@ -1,6 +1,6 @@
 <template>
     <div class="groups container">
-        <div class="controls d-flex justify-content-between margin-bottom-15">
+        <div class="controls d-flex justify-content-between margin-bottom-8">
             <h3>Insert the seeds</h3>
             <router-link class="btn btn-dark btn-color-pink btn-hover-aqua" to="/prediction/groupstage" event="" @click.native.prevent="processGroups()">Draw</router-link>
         </div> 

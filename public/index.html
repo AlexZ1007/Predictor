@@ -8,12 +8,16 @@
     <link rel="stylesheet" href="/style.css">
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body>
+  <body class="container-fluid">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
-
+    <footer class="footer">
+      <div class="container text-center">
+        <span class="text-muted">&#9400; 2021</span>
+      </div>
+    </footer>
     <!-- built files will be auto injected -->
   </body>
 </html>

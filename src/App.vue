@@ -47,7 +47,7 @@ export default {
       }
       localStorage.bracket=JSON.stringify(this.bracket); // Store bracket
     }
-  }  
+  },
 }
 </script>
 
