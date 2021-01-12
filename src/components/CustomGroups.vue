@@ -13,7 +13,7 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item" v-for="n in teamsPerGroup" :key="n">
             <input  type="text" class="form-control" @change="resetCSS(i.toString()+n.toString())" 
-                    placeholder="Insert team name" :id="i.toString()+n.toString()" autocomplete="off">
+                    placeholder="Insert a team name" :id="i.toString()+n.toString()" autocomplete="off">
           </li>
         </ul>
       </div>
@@ -75,7 +75,6 @@ export default {
       },
 
       makeDesignResponsive(){
-        console.log("Casa")
         if(window.innerWidth<790){  $(".groups .row").removeClass("row-cols-3"); $(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-1");  }
         else if(window.innerWidth<1000){ $(".groups .row").removeClass("row-cols-3"); $(".groups .row").addClass("row-cols-2");} 
         else{  $(".groups .row").addClass("row-cols-3"); $(".groups .row").removeClass("row-cols-2"); $(".groups .row").removeClass("row-cols-1");}

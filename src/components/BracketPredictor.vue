@@ -49,7 +49,6 @@ export default {
                 this.recoverProgress(i);
         }
         this.unlockInput(this.currentPhaseNum);
-        this.makeDesignResponsive();
     },
     methods:{
         nextRound(phaseNum){
@@ -77,7 +76,11 @@ export default {
         
                 let winner;
                 //Check which team progress to next round
-                if(team2.teamName=='N/A' || parseInt(team1.goals)>parseInt(team2.goals)){ 
+                if(team1.goals < 0 || team1.goals < 0) {
+                    $(id+" .card-footer").html("<span class='text-danger text-15'>Error! Goals MUST be a positive number!</span>");// Display error to the box
+                    $('.adv-'+phaseNum+' span').html("Error! Goals MUST be a positive number for all matches!"); //Display error under the top button
+                    error=true;
+               } else if(team2.teamName=='N/A' || parseInt(team1.goals)>parseInt(team2.goals)){ 
                     winner={teamName: team1.teamName, goals: 0};
                     $(id+' li:eq(0)').addClass('bg-win');    
                     $(id+' li:eq(1)').addClass('bg-lose');     // Set the bg                         
@@ -118,7 +121,6 @@ export default {
                 if(team.teamName=="N/A") continue;
                 $(id+' input:eq('+eq+')').removeAttr('disabled');
             }
-                        console.log("unlock")
             $("#next-btn"+phaseNum).removeAttr('hidden');
         },
         final(){
@@ -158,7 +160,6 @@ export default {
         },
         recoverProgress(phaseNum){
             let currentPhase=this.bracket['phase'+phaseNum];
-            console.log(currentPhase)
             for(let j=0;j<currentPhase.length;j+=2){
                 let id='#'+phaseNum+''+Math.ceil((j+1)/2);
                 $(id+" input:eq(0)").val(currentPhase[j].goals); 

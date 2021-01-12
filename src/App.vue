@@ -46,6 +46,7 @@ export default {
         unseeded.splice(randomNumForUnseeded,1);
       }
       localStorage.bracket=JSON.stringify(this.bracket); // Store bracket
+      localStorage.currentPhaseNum=JSON.stringify(1); // Reset phase number
     }
   },
 }

@@ -18,7 +18,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">{{$parent.groups[i][n].name}}</span>
                 </div>
-                <input type="number" class="form-control place" min="1" :max="teamsPerGroup" placeholder="Plc">
+                <input type="number" class="form-control place" min="1" :max="teamsPerGroup" placeholder="Plc" :value="n">
                 <input type="number" class="form-control points" min="0" :max="maxPoints" placeholder="Pts" value="0">
                 <input type="number" class="form-control GD" placeholder="GD" value="0">
             </div>
@@ -69,8 +69,10 @@ export default {
             let GD=$("#"+id+" .GD").val();
 
             //Input Validation
-            if(!place || !points || !GD)    {error= this.displayInputError("Error! All inputs MUST be filled", cardFooter, cardHeader); break;}                 
-            if(availablePlaces[place]==0)   {error= this.displayInputError('Error! Place MUST be unique!', cardFooter, cardHeader); break;}
+            if(!place || !points || !GD)                  {error= this.displayInputError("Error! All inputs MUST be filled", cardFooter, cardHeader); break;}                 
+            else if(place<1 || place>teamsPerGroup)       {error= this.displayInputError("Error! Place MUST be between 1-"+teamsPerGroup, cardFooter, cardHeader); break;}                 
+            else if(points<0 || points>this.maxPoints)    {error= this.displayInputError("Error! Points MUST be between 0-"+this.maxPoints, cardFooter, cardHeader); break;}                 
+            else if(availablePlaces[place]==0)            {error= this.displayInputError('Error! Place MUST be unique!', cardFooter, cardHeader); break;}
             
             availablePlaces[place]=0;
             team.points=points; team.place=place; team.GD=GD;
@@ -93,7 +95,7 @@ export default {
             $("#"+id+" .GD").prop( "disabled", true );
           } 
         } // For loops END      
-        this.$parent.createBracket(seeded, unseeded); 
+        this.$parent.createBracket(seeded, unseeded);
       },
 
       displayInputError(message, cardFooter, cardHeader){
