@@ -13,7 +13,7 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item" v-for="n in teamsPerGroup" :key="n">
             <input  type="text" class="form-control" @change="resetCSS(i.toString()+n.toString())" 
-                    placeholder="Insert a team name" :id="i.toString()+n.toString()" autocomplete="off">
+                    placeholder="Insert a team name" :id="i.toString()+n.toString()" autocomplete="off" maxlength="14">
           </li>
         </ul>
       </div>
@@ -36,7 +36,10 @@ export default {
         teamsPerGroup: this.$parent.competions[this.compID].teamsPerGroup,
       }
     },
-    mounted(){this.makeDesignResponsive()},
+    mounted(){
+      this.makeDesignResponsive()
+    
+    },
     props: ['compID'],
     methods:{
       processGroups(){
@@ -71,7 +74,7 @@ export default {
 
       resetCSS(id){
           $("#"+id).css("border","1px solid black");
-          $("#"+id).attr("placeholder","Insert team name");
+          $("#"+id).attr("placeholder","Insert a team name");
       },
 
       makeDesignResponsive(){

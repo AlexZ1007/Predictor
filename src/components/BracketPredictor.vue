@@ -1,13 +1,13 @@
 <template>
-    <div class="container margin-top-10">
-        <div class="row ">
-            <div class="col align-self-center" v-for="i in totalPhasesNumber" :key="i">
+    <div class="container margin-top-10" v-if="validCompId">
+        <div class="d-flex flex-md-nowrap">
+            <div id="bracket" class="col align-self-center" v-for="i in totalPhasesNumber" :key="i">
                 <div id="advance-div" :class="'adv-'+i+' margin-bottom-15'">
                     <router-link :id="'next-btn'+i" class="btn btn-dark btn-color-pink btn-hover-aqua" to="" event="" @click.native.prevent="nextRound(i)" hidden>Next round</router-link><br> 
                     <span class="text-danger text-15"></span>
                 </div>
                 
-                <div class="card border-2 margin-bottom-15 " v-for="n in bracket['phase'+i].length/2" :key="n" :id="i.toString()+n.toString()"> 
+                <div class="card border-2 margin-bottom-15 " style="width:330px" v-for="n in bracket['phase'+i].length/2" :key="n" :id="i.toString()+n.toString()"> 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" v-for="j in 2" :key="j">
                           <div class="input-group">
@@ -33,17 +33,25 @@ export default {
         return {
             currentPhaseNum: 1,
             totalPhasesNumber: this.$parent.totalPhasesNumber,
-            bracket: this.$parent.bracket
+            bracket: this.$parent.bracket,
+            validCompId: false
             } 
         },
+    props: ['compID'],
     created(){
+        if(!this.$parent.competions[this.compID]){
+            this.$router.push(this.compID+"/404-invalid-id");
+            return 0;
+        }
         if(!this.bracket['phase'+1]) {
             this.bracket=JSON.parse(localStorage.bracket);
             this.totalPhasesNumber=JSON.parse(localStorage.totalPhasesNumber);
             this.currentPhaseNum=JSON.parse(localStorage.currentPhaseNum) 
         }
+        this.validCompId=true;
     },
     mounted: function(){
+        if(!this.validCompId) return 0; 
         for(let i=1; i<this.currentPhaseNum; i++){
                 this.unlockInput(i);
                 this.recoverProgress(i);

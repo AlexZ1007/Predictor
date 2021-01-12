@@ -10,7 +10,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" v-for="n in teamsPerSeed" :key="n">
                         <input  type="text" class="form-control" @change="resetCSS(i.toString()+n.toString())" 
-                            placeholder="Insert a team name"  autocomplete="off">
+                            placeholder="Insert a team name"  autocomplete="off" maxlength="14">
                     </li>
                 </ul>
             </div>
@@ -48,14 +48,16 @@ export default {
                 $("#"+id).css("border","1px solid red");
                 redirect=false;
                 continue;
-              }
+              } 
               if(!$("#"+id).val().match(/([a-zA-Z])+([ -~])*/)){   //Check if the input hasn t only empty spaces
                 $("#"+id).val("");
                 $("#"+id).attr("placeholder", "Insert at least one letter!");
                 $("#"+id).css("border","1px solid orange");
                 redirect=false;
                 continue;
-              }
+              } 
+  
+
               // Insert the teams into the groups variable  
               this.seeds[i].push({name: $("#"+id).val(), points: 0, place: 0, GD: 0});
             }
@@ -82,7 +84,7 @@ export default {
 
       resetCSS(id){
           $("#"+id).css("border","1px solid black");
-          $("#"+id).attr("placeholder","Insert team name");
+          $("#"+id).attr("placeholder","Insert a team name");
       },
       makeDesignResponsive(){
         if(window.innerWidth<780){$(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-1");}
