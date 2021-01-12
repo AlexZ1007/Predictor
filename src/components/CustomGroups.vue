@@ -1,8 +1,11 @@
 <template>
   <div class="groups container">
-    <div class="controls d-flex justify-content-between">
-      <h3>Insert the groups</h3>
-      <router-link class="btn btn-dark btn-color-pink btn-hover-aqua" to="/prediction/groupstage" event="" @click.native.prevent="processGroups()">Confirm</router-link>
+    <div class="controls">
+      <div class="d-flex justify-content-between"> 
+        <h3>Insert the groups</h3>
+        <router-link class="btn btn-dark btn-color-pink btn-hover-aqua" to="/prediction/groupstage" event="" @click.native.prevent="processGroups()">Confirm</router-link>
+      </div>
+      <span class="d-flex justify-content-center text-danger"></span>
     </div>
     
     <div class="row row-cols-3">
@@ -68,7 +71,7 @@ export default {
             // Save the groups into local storage
             localStorage.groups=JSON.stringify(this.$parent.groups);
           }
-          if(!redirect) return 0;
+          if(!redirect){$(".controls span").html('Error! Invalid input! Check all the input fields!'); return 0;} 
           this.$router.push("/prediction/groupStage/"+this.compID);
       },
 

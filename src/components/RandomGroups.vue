@@ -1,15 +1,18 @@
 <template>
     <div class="groups container">
-        <div class="controls d-flex justify-content-between margin-bottom-8">
-            <h3>Insert the seeds</h3>
-            <router-link class="btn btn-dark btn-color-pink btn-hover-aqua" to="/prediction/groupstage" event="" @click.native.prevent="processGroups()">Draw</router-link>
+        <div class="controls margin-bottom-8">
+            <div class="d-flex justify-content-between">
+              <h3>Insert the seeds</h3>
+              <router-link class="btn btn-dark btn-color-pink btn-hover-aqua" to="/prediction/groupstage" event="" @click.native.prevent="processGroups()">Draw</router-link>
+            </div>
+            <span class="d-flex justify-content-center text-danger"></span>
         </div> 
         <div class="row card-cols-4">
             <div class="card col no-padding-rl" v-for="i in seedsNum" :key="i">
                 <div class="card-header">Seed #{{i}}</div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" v-for="n in teamsPerSeed" :key="n">
-                        <input  type="text" class="form-control" @change="resetCSS(i.toString()+n.toString())" 
+                        <input  type="text" class="form-control" @change="resetCSS(i.toString()+n.toString())"  :id="i.toString()+n.toString()"
                             placeholder="Insert a team name"  autocomplete="off" maxlength="14">
                     </li>
                 </ul>
@@ -39,7 +42,9 @@ export default {
     methods:{
       processGroups(){
           let redirect=true;
+          
           for (let i=1; i<=this.seedsNum; i++){ 
+            
             this.seeds.push([]);
             for(let n=1; n<=this.teamsPerSeed; n++){
               let id=i+''+n
@@ -56,13 +61,13 @@ export default {
                 redirect=false;
                 continue;
               } 
-  
+              
 
               // Insert the teams into the groups variable  
               this.seeds[i].push({name: $("#"+id).val(), points: 0, place: 0, GD: 0});
             }
           }
-          if(!redirect) return 0;
+          if(!redirect){ $(".controls span").html('Error! Invalid input! Check all the input fields!'); return 0;}
           this.randomDrawGroups(this.seeds);
           this.$router.push("/prediction/groupStage/"+this.compID);
       },

@@ -1,7 +1,7 @@
 <template>
     <div class="container margin-top-10" v-if="validCompId">
-        <div class="d-flex flex-md-nowrap">
-            <div id="bracket" class="col align-self-center" v-for="i in totalPhasesNumber" :key="i">
+        <div id="bracket" class="d-flex flex-md-nowrap">
+            <div class="col align-self-center" v-for="i in totalPhasesNumber" :key="i">
                 <div id="advance-div" :class="'adv-'+i+' margin-bottom-15'">
                     <router-link :id="'next-btn'+i" class="btn btn-dark btn-color-pink btn-hover-aqua" to="" event="" @click.native.prevent="nextRound(i)" hidden>Next round</router-link><br> 
                     <span class="text-danger text-15"></span>
@@ -49,6 +49,7 @@ export default {
             this.currentPhaseNum=JSON.parse(localStorage.currentPhaseNum) 
         }
         this.validCompId=true;
+        window.addEventListener("resize", function(){ $("footer").css("width", $( document ).width())  });
     },
     mounted: function(){
         if(!this.validCompId) return 0; 
@@ -130,6 +131,7 @@ export default {
                 $(id+' input:eq('+eq+')').removeAttr('disabled');
             }
             $("#next-btn"+phaseNum).removeAttr('hidden');
+            $("#next-btn"+(phaseNum-1)).hide();
         },
         final(){
             let phaseNum=this.totalPhasesNumber;

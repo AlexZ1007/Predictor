@@ -1,9 +1,12 @@
 <template>
   <div class="groups container">
-    <div class="controls d-flex justify-content-between">
-      <h3>Insert your predicton</h3>
-      <button class="btn btn-dark btn-color-pink btn-hover-aqua" id='confirm' v-on:click="highlightQualifiedTeams()">Confirm</button>
-      <router-link class="btn btn-dark btn-color-pink btn-hover-aqua" id='advance' :to="'/prediction/bracket/'+compID" hidden>Advance to bracket</router-link>
+    <div class="controls">
+      <div class="d-flex justify-content-between">
+        <h3>Insert your predicton</h3>
+        <button class="btn btn-dark btn-color-pink btn-hover-aqua" id='confirm' v-on:click="highlightQualifiedTeams()">Confirm</button>
+        <router-link class="btn btn-dark btn-color-pink btn-hover-aqua" id='advance' :to="'/prediction/bracket/'+compID" hidden>Advance to bracket</router-link>
+      </div>
+      <span class="d-flex justify-content-center text-danger"></span>
     </div>
     
     <div class="row row-cols-3">
@@ -18,7 +21,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">{{$parent.groups[i][n].name}}</span>
                 </div>
-                <input type="number" class="form-control place" min="1" :max="teamsPerGroup" placeholder="Plc" :value="n">
+                <input type="number" class="form-control place" min="1" :max="teamsPerGroup" placeholder="Plc" >
                 <input type="number" class="form-control points" min="0" :max="maxPoints" placeholder="Pts" value="0">
                 <input type="number" class="form-control GD" placeholder="GD" value="0">
             </div>
@@ -69,9 +72,9 @@ export default {
             let GD=$("#"+id+" .GD").val();
 
             //Input Validation
-            if(!place || !points || !GD)                  {error= this.displayInputError("Error! All inputs MUST be filled", cardFooter, cardHeader); break;}                 
-            else if(place<1 || place>teamsPerGroup)       {error= this.displayInputError("Error! Place MUST be between 1-"+teamsPerGroup, cardFooter, cardHeader); break;}                 
-            else if(points<0 || points>this.maxPoints)    {error= this.displayInputError("Error! Points MUST be between 0-"+this.maxPoints, cardFooter, cardHeader); break;}                 
+            if(!place || !points || !GD)                  {error= this.displayInputError("Error! All inputs MUST be filled!", cardFooter, cardHeader); break;}                 
+            else if(place<1 || place>teamsPerGroup)       {error= this.displayInputError("Error! Place MUST be between 1-"+teamsPerGroup+"!", cardFooter, cardHeader); break;}                 
+            else if(points<0 || points>this.maxPoints)    {error= this.displayInputError("Error! Points MUST be between 0-"+this.maxPoints+"!", cardFooter, cardHeader); break;}                 
             else if(availablePlaces[place]==0)            {error= this.displayInputError('Error! Place MUST be unique!', cardFooter, cardHeader); break;}
             
             availablePlaces[place]=0;
@@ -79,7 +82,7 @@ export default {
           }
         } // For loops END
 
-        if(error) return 0;
+        if(error) { $(".controls span").html('Error! Invalid input! Check all the input fields!'); return 0;}
         $('#confirm').hide();
         $('#advance').removeAttr('hidden');
        let seeded=[], unseeded=[];
@@ -104,6 +107,7 @@ export default {
         return true;
       },
       makeDesignResponsive(){
+        
         if(window.innerWidth<1000){ $(".groups .row").removeClass("row-cols-3"); $(".groups .row").removeClass("row-cols-2"); $(".groups .row").addClass("row-cols-1");  }
         else if(window.innerWidth<1200){ $(".groups .row").removeClass("row-cols-3"); $(".groups .row").addClass("row-cols-2");  }
         else{  $(".groups .row").addClass("row-cols-3"); $(".groups .row").removeClass("row-cols-2"); $(".groups .row").removeClass("row-cols-1");}
