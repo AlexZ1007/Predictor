@@ -7,7 +7,8 @@ import CustomGroups from '../components/CustomGroups.vue'
 import RandomGroups from '../components/RandomGroups.vue'
 import GroupStagePredictor from '../components/GroupStagePredictor.vue'
 import BracketPredictor from '../components/BracketPredictor.vue'
-import Page404 from '../components/Page404'
+import Page404 from '../components/Page404.vue'
+import Winner from '../components/Winner.vue'
 
 Vue.use(VueRouter)
 
@@ -47,10 +48,17 @@ const routes = [
     props: true
   },
   {
+    path: '/prediction/bracket/winner/:name',
+    name: 'winner',
+    component: Winner,
+    props: true
+  },
+  {
     path: '/*',
     name: '404',
     component: Page404
   },
+  
 
 ]
 

@@ -113,7 +113,8 @@ body {
 }
 .text-muted{color: #F1BBCC !important;}
 #app div{margin-bottom: 10px;}
-/* #app #compSelect .competionsDisplay{margin-bottom: 0px !important;} */
+#app #compSelect {margin-bottom: 0px !important;}
+#app #compSelect .competionsDisplay{margin-bottom: 0px !important;}
 #app #compSelect .competionsDisplay .col{margin-bottom: 0px !important;}
 .card-header{margin-bottom: 0px !important;}
 #bracket .card-footer{

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 export default {
   data: function (){
     return{
@@ -17,6 +18,7 @@ export default {
       bracket:{}
     }
   },
+
   methods:{
     createBracket(seeded, unseeded){
       // Create empty bracket

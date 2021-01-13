@@ -113,7 +113,13 @@ export default {
                 input_team1.prop( "disabled", true );
                 input_team2.prop( "disabled", true );
             }
-            if(error) return 0;
+            if(error) return 0;     
+            let leftPos = $('#wrapper').scrollLeft(); 
+            $("#wrapper").animate({
+            scrollLeft: leftPos + 335
+            }, 800);
+            
+        
             this.currentPhaseNum+=1;
             localStorage.bracket=JSON.stringify(this.bracket); // Store bracket
             localStorage.currentPhaseNum=JSON.stringify(this.currentPhaseNum); // Store bracket
@@ -152,12 +158,14 @@ export default {
             let error=false;
 
             if(team2.teamName=='N/A' || parseInt(team1.goals)>parseInt(team2.goals)){ 
-                $(id+' li:eq(0)').addClass('bg-win');    
-                $(id+' li:eq(1)').addClass('bg-lose');     // Set the bg                         
+                // $(id+' li:eq(0)').addClass('bg-win');    
+                // $(id+' li:eq(1)').addClass('bg-lose');     // Set the bg            
+                this.$router.push('winner/'+team1.teamName);             
             }
             else if(team1.teamName=='N/A' || parseInt(team1.goals)<parseInt(team2.goals)){  
-                $(id+' li:eq(0)').addClass('bg-lose');       
-                $(id+' li:eq(1)').addClass('bg-win');     // Set the bg     
+                // $(id+' li:eq(0)').addClass('bg-lose');       
+                // $(id+' li:eq(1)').addClass('bg-win');     // Set the bg   
+                this.$router.push('winner/'+team2.teamName);       
             } else if(team1.teamName!='N/A' && team2.teamName!='N/A'){
                 $(id+" .card-footer").html("<span class='text-danger text-15'>Error! Score CAN'T be equal!</span>");// Display error to the box
                 $('.adv-'+phaseNum+' span').html("Error! All matches need a winner! Score CAN'T be equal!"); //Display error under the top button
